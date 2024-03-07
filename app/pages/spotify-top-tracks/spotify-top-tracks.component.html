@@ -1,0 +1,31 @@
+<!-- Spotify top tracks component HTML -->
+<h1> Your Top 20 Tracks</h1>
+<!-- Row for displaying track cards -->
+<div class="row">
+    <!-- Iterate over each track in the topTracks array -->
+    <div class="col-md-4" *ngFor="let track of topTracks">
+        <!-- Card to display track information -->
+        <div class="card">
+            <!-- Display track image -->
+            <img [src]="track.album.images[0].url" class="card-img-top" alt="Track Image">
+            <div class="card-body">
+                <!-- Display track name as a link to the track page -->
+                <h5 class="card-title">
+                    <a href="/track/{{ track.id }}">{{ track.name }} </a>
+                </h5>
+                <!-- Display track artists as links to their respective artist pages -->
+                <p class="card-text">Artists:
+                    <!-- Iterate over each artist in the track's artists array -->
+                    <span *ngFor="let artist of track.artists">
+                        <a href="/artist/{{ artist.id }}">{{ artist.name }} </a>
+                    </span>
+                </p>
+                <!-- Display track duration -->
+                <p class="card-text">Duration: {{ track.duration_ms }}
+                </p>
+                <!-- Button to listen to the track on Spotify (opens in a new tab) -->
+                <a [href]="track.external_urls.spotify" class="btn btn-primary" target="_blank">Listen on Spotify</a>
+            </div>
+        </div>
+    </div>
+</div>
